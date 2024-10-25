@@ -1,7 +1,7 @@
 set +o history
 
 gitRepoName=$(basename `git rev-parse --show-toplevel`)
-RulesCatPath="/d/Общая/Кд3Обмены/Срань" ##Где ищем обработку с правилами
+RulesCatPath="/d/Общая/Кд3Обмены/Правила" ##Где ищем обработку с правилами
 
 gitBranchName="main"
 commit="Обновление правил $gitRepoName"
