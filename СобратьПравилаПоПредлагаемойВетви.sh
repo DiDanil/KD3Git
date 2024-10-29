@@ -27,6 +27,8 @@ select branch in "${branches_array[@]}"; do
        
 	    git switch "$branch"
 		
+		mkdir "$gitCatPath/ПравилаОбменаСобранные" 2>/dev/null
+		
 		filename="ПравилаОбменаСобранные_$branch"
 		cleaned_filename="${filename//[\*\|\\\:\"<>\?\/]/_}"
 		filepath="$gitCatPath/ПравилаОбменаСобранные/$cleaned_filename.txt"
