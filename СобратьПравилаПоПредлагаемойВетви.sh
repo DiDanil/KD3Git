@@ -1,6 +1,8 @@
 #!/bin/bash
 
+#set -x  # Включаем режим отладки
 set +o history
+
 gitRepoName=$(basename `git rev-parse --show-toplevel`)
 PreviousFile=$1
 
@@ -22,7 +24,7 @@ fi
 
 # Получаем список веток
 #branches=$(git branch --all | grep -v '\->' | grep -v 'feature' | sed 's/^[ *]*//')
-branches=$(git branch --all | $branchfilter | sed 's/^[ *]*//')
+branches=$(git branch --all | eval $branchfilter | sed 's/^[ *]*//')
 # Преобразуем список веток в массив
 branches_array=($branches)
 
