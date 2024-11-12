@@ -9,7 +9,6 @@ gitKD3GitPath=$5 ##Путь к репозиторию KD3Git/Вынести в �
 
 gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
 gitKD3GitPath="$gitHome/KD3Git" 
-gitIgnoreDirName="Ignore" ##Вынести в общие настройки/Чет херня какая то
 
 gitCatPath="$gitHome/$gitRepoName" ##Каталог репозитория правил
 gitRulesPath="$gitCatPath/ПравилаОбмена" ##Правила обмена разобранные на функции
@@ -21,7 +20,7 @@ RulesFileName="МенеджерОбмена.txt" ##Текстовый файл �
 
 ##cd "$RulesCatPath"
 
-mkdir "$gitCatPath/$gitIgnoreDirName" 2>/dev/null
+mkdir "$gitCatPath/Ignore" 2>/dev/null
 rm -r "$ResDisassemblyCat" 2>/dev/null
 mkdir "$ResDisassemblyCat" 2>/dev/null
 
@@ -32,6 +31,13 @@ mkdir "$ResDisassemblyCat" 2>/dev/null
 if "$gitKD3GitPath/РазборОбработкиНаИсходникиЧерезКонфигуратор.sh" "$ResDisassemblyCat" "$EPFPath" "$(pwd)\out.txt"; then
 	
 	cd "$gitCatPath"
+	
+	if echo $(git branch)|grep -q "$gitBranchName"; then
+		git switch "$gitBranchName"
+	else
+		git switch -c "$gitBranchName" ##Если делаем новую ветку, то перед ее созданием надо выбрать и перейти на ее родителя
+	fi
+	
 	git pull origin "$gitBranchName" ##??? / заменить origin на переменную
 	
 	cd "$ResDisassemblyCat"
@@ -41,11 +47,7 @@ if "$gitKD3GitPath/РазборОбработкиНаИсходникиЧере�
 
 	cd "$gitCatPath"
 	
-	if echo $(git branch)|grep -q "$gitBranchName"; then
-		git switch "$gitBranchName"
-	else
-		git switch -c "$gitBranchName"
-	fi
+
 
 	git add . 
 	git commit -m "$commit"
