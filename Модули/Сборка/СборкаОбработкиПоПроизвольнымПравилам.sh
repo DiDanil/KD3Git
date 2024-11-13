@@ -14,6 +14,7 @@ EPFPath=$5
 
 gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
 gitKD3GitPath="$gitHome/KD3Git" 
+PathToAssemblyScripts="$gitKD3GitPath/Модули/Сборка"
 
 SourcePath="$(pwd)/ИсходникиДляСборки/$NAME.xml" ##Исходники обработки для сборки
 
@@ -39,7 +40,7 @@ sed -e "s/{{EPFName}}/$NAME/g" \
 # Преобразуем его в формат Windows
 windows_logpath=$(echo "$logpath" | sed -E 's|^/([a-z])/|\U\1:\\|') ##Почему то для вывода лога линуксовые формат пути не работает
 
-"$gitKD3GitPath/СборкаОбработкиИзИсходниковЧерезКонфигуратор.sh" "$SourcePath" "$EPFPath" "$windows_logpath";
+"$PathToAssemblyScripts/СборкаОбработкиИзИсходниковЧерезКонфигуратор.sh" "$SourcePath" "$EPFPath" "$windows_logpath";
 
 # Проверка на ошибку выполнения команды
 if [ $? -ne 0 ]; then
