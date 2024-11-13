@@ -9,6 +9,7 @@ gitKD3GitPath=$5 ##Путь к репозиторию KD3Git/Вынести в �
 
 gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
 gitKD3GitPath="$gitHome/KD3Git" 
+PathToDisassemblyScripts="$gitKD3GitPath/Модули/Разборка"
 
 gitCatPath="$gitHome/$gitRepoName" ##Каталог репозитория правил
 gitRulesPath="$gitCatPath/ПравилаОбмена" ##Правила обмена разобранные на функции
@@ -28,7 +29,7 @@ mkdir "$ResDisassemblyCat" 2>/dev/null
 #Мб имеет смысл выгружать результат разбора в отдельный подкаталог чтоб они перезатирались?
 
 ##																Куда сохранить Что разбирать
-if "$gitKD3GitPath/РазборОбработкиНаИсходникиЧерезКонфигуратор.sh" "$ResDisassemblyCat" "$EPFPath" "$(pwd)\out.txt"; then
+if "$PathToDisassemblyScripts/РазборОбработкиНаИсходникиЧерезКонфигуратор.sh" "$ResDisassemblyCat" "$EPFPath" "$(pwd)\out.txt"; then
 	
 	cd "$gitCatPath"
 	
@@ -43,7 +44,7 @@ if "$gitKD3GitPath/РазборОбработкиНаИсходникиЧере�
 	cd "$ResDisassemblyCat"
 	cp $(find "$ResDisassemblyCat" -name '*.bsl') "$RulesFileName";
 
-	oscript "$gitKD3GitPath/РазборПравилОбмена.os" "$ResDisassemblyCat/$RulesFileName" "$gitCatPath/ПравилаОбмена"
+	oscript "$PathToDisassemblyScripts/РазборПравилОбмена.os" "$ResDisassemblyCat/$RulesFileName" "$gitCatPath/ПравилаОбмена"
 
 	cd "$gitCatPath"
 	

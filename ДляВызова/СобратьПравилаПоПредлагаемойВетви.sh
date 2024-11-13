@@ -8,6 +8,7 @@ PreviousFile=$1
 
 gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
 gitKD3GitPath="$gitHome/KD3Git" ##Вынести в общие настройки
+PathToAssemblyScripts="$gitKD3GitPath/Модули/Сборка"
 
 gitCatPath="$gitHome/$gitRepoName" ##Каталог репозитория правил
 gitRulesPath="$gitCatPath/ПравилаОбмена" ##Правила обмена разобранные на функции
@@ -47,7 +48,7 @@ select branch in "${branches_array[@]}"; do
 		
 		branchHead=$(git log -1 | awk '{print $1}')
 	
-		oscript "$gitKD3GitPath/СборкаПравилОбмена.os" "$gitRulesPath" "$filepath" "$gitRepoName" "$branch" $branchHead
+		oscript "$PathToAssemblyScripts/СборкаПравилОбмена.os" "$gitRulesPath" "$filepath" "$gitRepoName" "$branch" $branchHead
 		echo -e "\e[32mГотово. $filepath\e[0m"
 		
 		read -e -p 'Собрать обработку менеджера по выбранной ветви? (y/n, по умолчанию y): ' answer
@@ -60,7 +61,7 @@ select branch in "${branches_array[@]}"; do
 			RulesTxt="$filepath"
 			EPFPath="$ResCatalogPath"
 			
-			"$gitKD3GitPath/СборкаОбработкиПоПроизвольнымПравилам.sh" $EPFName "$EPFSynonym" "$EPFComment" "$RulesTxt" "$EPFPath";
+			"$PathToAssemblyScripts/СборкаОбработкиПоПроизвольнымПравилам.sh" $EPFName "$EPFSynonym" "$EPFComment" "$RulesTxt" "$EPFPath";
 			
 			#exec "$0" $filepath # Перезапуск самого скрипта
 
