@@ -5,5 +5,11 @@
 	git config --global core.quotepath false
 	git config --global core.autocrlf false
 	git config --global core.safecrlf false
+	
+	git config --global protocol.file.allow always // Или вынести кд3гит на локальный сетевой GitLab, Bitbucket, для добавления сабмодуля?й
+	
+	format.pretty=%h %ad | %s%d [%an]
+	log.date=short
+
 
 Автоматическая начальная сборка репозитория (гитигнор, настройки путей, настройки репозитория, скрипты)
