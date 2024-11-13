@@ -5,10 +5,6 @@ commit=$3 ##Комментарий коммита
 EPFPath=$4 ##Обработка менеджера
 gitKD3GitPath=$5 ##Путь к репозиторию KD3Git/Вынести в общие настройки
 
-
-
-gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
-gitKD3GitPath="$gitHome/KD3Git" 
 PathToDisassemblyScripts="$gitKD3GitPath/Модули/Разборка"
 
 gitCatPath="$gitHome/$gitRepoName" ##Каталог репозитория правил

@@ -2,25 +2,20 @@
 
 #set -x  # Включаем режим отладки
 set +o history
+source $(git rev-parse --show-toplevel)/config.sh
 
-gitRepoName=$(basename `git rev-parse --show-toplevel`)
-PreviousFile=$1
+cd $gitCatPath
 
-gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
-gitKD3GitPath="$gitHome/KD3Git" ##Вынести в общие настройки
-PathToAssemblyScripts="$gitKD3GitPath/Модули/Сборка"
-
-gitCatPath="$gitHome/$gitRepoName" ##Каталог репозитория правил
 gitRulesPath="$gitCatPath/ПравилаОбмена" ##Правила обмена разобранные на функции
 ResCatalogPath="$gitCatPath/ПравилаОбменаСобранные" ##Каталог с результатами сборки правил
-NotePadPath="C:/Program Files/Notepad++/notepad++.exe"
+PreviousFile=$1
 
 read -e -p 'Исключить feature ветки? (y/n, по умолчанию y): ' answer 
 answer=${answer:-y}  # Если answer пустой (Enter), установить его в "y"
 if [[ $answer == "y" ]]; then
-branchfilter="grep -v '\->' | grep -v 'feature'"
+	branchfilter="grep -v '\->' | grep -v 'feature'"
 else
-branchfilter="grep -v '\->'"
+	branchfilter="grep -v '\->'"
 fi
 
 # Получаем список веток
@@ -61,7 +56,7 @@ select branch in "${branches_array[@]}"; do
 			RulesTxt="$filepath"
 			EPFPath="$ResCatalogPath"
 			
-			"$PathToAssemblyScripts/СборкаОбработкиПоПроизвольнымПравилам.sh" $EPFName "$EPFSynonym" "$EPFComment" "$RulesTxt" "$EPFPath";
+			"$PathToAssemblyScripts/СборкаОбработкиПоПроизвольнымПравилам.sh" $EPFName "$EPFSynonym" "$EPFComment" "$RulesTxt" "$EPFPath" "$gitKD3GitPath";
 			
 			#exec "$0" $filepath # Перезапуск самого скрипта
 

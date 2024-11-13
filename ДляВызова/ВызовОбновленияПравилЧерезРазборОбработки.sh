@@ -1,12 +1,5 @@
 set +o history
-
-gitRepoName=$(basename `git rev-parse --show-toplevel`)
-
-RulesCatPath="/d/Общая/Кд3Обмены/Правила" ##Где ищем обработку с правилами
-
-gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
-gitKD3GitPath="$gitHome/KD3Git" ##Путь к репозиторию KD3Git/Вынести в общие настройки
-PathToDisassemblyScripts="$gitKD3GitPath/Модули/Разборка"
+source $(git rev-parse --show-toplevel)/config.sh
 
 gitBranchName="dev"
 commit="Обновление правил $gitRepoName"

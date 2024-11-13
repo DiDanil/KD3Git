@@ -1,19 +1,13 @@
 #!/bin/bash
 
 # Определяем значения переменных
-NAME="МояОбработочка"
-Synonym="Моя обработочка"
-Comment="Комментарий вот такой вот"
-RulesTxt="ПравилаОбменаСобранные_main.txt"
-
 NAME=$1
 Synonym=$2
 Comment=$3
 RulesTxt=$4
 EPFPath=$5
+gitKD3GitPath=$6
 
-gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
-gitKD3GitPath="$gitHome/KD3Git" 
 PathToAssemblyScripts="$gitKD3GitPath/Модули/Сборка"
 
 SourcePath="$(pwd)/ИсходникиДляСборки/$NAME.xml" ##Исходники обработки для сборки
