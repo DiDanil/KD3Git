@@ -1,12 +1,9 @@
 set +o history
-
-gitRepoName=$(basename `git rev-parse --show-toplevel`)
-
-gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
-gitKD3GitPath="$gitHome/KD3Git" ##Путь к репозиторию KD3Git/Вынести в общие настройки
-PathToRepoEditScripts="$gitKD3GitPath/Модули/РаботаСРепозиторием"
+source $(git rev-parse --show-toplevel)/config.sh
 
 gitBranchName=$1
+
+cd $gitCatPath
 
 read -e -p 'branch: ' -i "${gitBranchName:-dev}" gitBranchName
 
