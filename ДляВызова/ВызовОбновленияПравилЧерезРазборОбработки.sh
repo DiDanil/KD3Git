@@ -20,6 +20,6 @@ done
 read -e -p 'branch: ' -i "$gitBranchName" gitBranchName
 read -e -p 'Текст коммита(номер запроса): ' -i "$commit" commit
 
-"$PathToDisassemblyScripts/ОбновитьПравилаРазобравОбработку.sh" "$gitRepoName" "$gitBranchName" "$commit"  "$EPFPath" "$gitKD3GitPath"
+"$PathToDisassemblyScripts/ОбновитьПравилаРазобравОбработку.sh" "$gitRepoName" "$gitBranchName" "$commit"  "$EPFPath" "$gitKD3GitPath" "$gitCatPath" 
 
 $SHELL
