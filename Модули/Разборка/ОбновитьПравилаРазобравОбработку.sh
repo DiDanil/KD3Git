@@ -54,4 +54,4 @@ else
 	echo $?
 fi
 
-$SHELL
+#$SHELL
