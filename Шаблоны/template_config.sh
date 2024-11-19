@@ -2,6 +2,7 @@ RulesCatPath="/d/Общая/Кд3Обмены/Правила" ##Где ищем 
 gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки !!
 NotePadPath="C:/Program Files/Notepad++/notepad++.exe"
 
+initialDir="$(pwd)"
 gitRepoPath=$(git rev-parse --show-toplevel)
 gitRepoName=$(basename $gitRepoPath)
 
