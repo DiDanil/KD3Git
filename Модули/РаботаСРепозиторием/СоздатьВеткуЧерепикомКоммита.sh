@@ -30,7 +30,7 @@ select commit in "${commits_array[@]}"; do
 			git switch -c "feature/ready/$gitBranchName" main
 		fi
 
-		git cherry-pick "$commit_hash"
+		git cherry-pick -x "$commit_hash"
 		#git switch dev 
 		#git merge "feature/$gitBranchName"
 
