@@ -1,6 +1,9 @@
 #!/bin/bash
+source $(git rev-parse --show-toplevel)/config.sh
 
 set +o history
+
+cd "$gitCatPath"
 
 # Получаем список слитых веток
 branches=$(git branch --merged | grep 'feature' | grep -v '\->' | sed 's/^[ *]*//')
