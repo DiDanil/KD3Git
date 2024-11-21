@@ -13,6 +13,7 @@ git cherry-pick --skip
 echo "Скрипт завершен, хотите ли вы его перезапустить? (y/n)"
 read answer
 if [[ $answer == "y" ]]; then
+    cd "$initialDir"
     exec "$0" "$gitBranchName" # Перезапуск самого скрипта
 fi
 fi
