@@ -84,6 +84,7 @@ fi
 echo "Скрипт завершен, хотите ли вы его перезапустить? (y/n)"
 read answer
 if [[ $answer == "y" ]]; then
+	cd "$initialDir"
     exec "$0" $filepath # Перезапуск самого скрипта
 fi
 fi
