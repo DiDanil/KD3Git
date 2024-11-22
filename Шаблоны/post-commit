@@ -1,0 +1,2 @@
+#!/bin/sh
+echo $(git log -1 HEAD) >> service/testres.txt

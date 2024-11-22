@@ -4,14 +4,10 @@ gitBranchName=$2
 commit=$3 ##Комментарий коммита
 EPFPath=$4 ##Обработка менеджера
 gitKD3GitPath=$5 ##Путь к репозиторию KD3Git/Вынести в общие настройки
+gitCatPath=$6 ##Каталог репозитория правил
 
+PathToDisassemblyScripts="$gitKD3GitPath/Модули/Разборка"
 
-
-gitHome="/d/Общая/git/rep" ##Кореновой каталог репозиториев / Вынести в общие настройки
-gitKD3GitPath="$gitHome/KD3Git" 
-gitIgnoreDirName="Ignore" ##Вынести в общие настройки/Чет херня какая то
-
-gitCatPath="$gitHome/$gitRepoName" ##Каталог репозитория правил
 gitRulesPath="$gitCatPath/ПравилаОбмена" ##Правила обмена разобранные на функции
 ResDisassemblyCat="$gitCatPath/Ignore/РезультатРазбораОбработкиНаИсходники" ##Обработка менеджера разобранная на исходники
 
@@ -21,7 +17,7 @@ RulesFileName="МенеджерОбмена.txt" ##Текстовый файл �
 
 ##cd "$RulesCatPath"
 
-mkdir "$gitCatPath/$gitIgnoreDirName" 2>/dev/null
+mkdir "$gitCatPath/Ignore" 2>/dev/null
 rm -r "$ResDisassemblyCat" 2>/dev/null
 mkdir "$ResDisassemblyCat" 2>/dev/null
 
@@ -29,23 +25,26 @@ mkdir "$ResDisassemblyCat" 2>/dev/null
 #Мб имеет смысл выгружать результат разбора в отдельный подкаталог чтоб они перезатирались?
 
 ##																Куда сохранить Что разбирать
-if "$gitKD3GitPath/РазборОбработкиНаИсходникиЧерезКонфигуратор.sh" "$ResDisassemblyCat" "$EPFPath" "$(pwd)\out.txt"; then
+if "$PathToDisassemblyScripts/РазборОбработкиНаИсходникиЧерезКонфигуратор.sh" "$ResDisassemblyCat" "$EPFPath" "$(pwd)\out.txt"; then
 	
-	cd "$gitCatPath"
-	git pull origin "$gitBranchName" ##??? / заменить origin на переменную
-	
-	cd "$ResDisassemblyCat"
-	cp $(find "$ResDisassemblyCat" -name '*.bsl') "$RulesFileName";
-
-	oscript "$gitKD3GitPath/РазборПравилОбмена.os" "$ResDisassemblyCat/$RulesFileName" "$gitCatPath/ПравилаОбмена"
-
 	cd "$gitCatPath"
 	
 	if echo $(git branch)|grep -q "$gitBranchName"; then
 		git switch "$gitBranchName"
 	else
-		git switch -c "$gitBranchName"
+		git switch -c "$gitBranchName" ##Если делаем новую ветку, то перед ее созданием надо выбрать и перейти на ее родителя
 	fi
+	
+	git pull origin "$gitBranchName" ##??? / заменить origin на переменную
+	
+	cd "$ResDisassemblyCat"
+	cp $(find "$ResDisassemblyCat" -name '*.bsl') "$RulesFileName";
+
+	oscript "$PathToDisassemblyScripts/РазборПравилОбмена.os" "$ResDisassemblyCat/$RulesFileName" "$gitCatPath/ПравилаОбмена"
+
+	cd "$gitCatPath"
+	
+
 
 	git add . 
 	git commit -m "$commit"
@@ -55,4 +54,4 @@ else
 	echo $?
 fi
 
-$SHELL
+#$SHELL
