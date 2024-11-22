@@ -1,5 +1,7 @@
 ﻿Подключаемый_ИдентификаторМодуля.txt
 ПравилаОбменаСобранные.txt
+RepoConfig.sh
+
 /Test
 /Ignore
 /Service
